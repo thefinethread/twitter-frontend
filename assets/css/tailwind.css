@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-custom-hover {
+	@apply hover:bg-zinc-800 p-3 rounded-full transition-colors;
+}
