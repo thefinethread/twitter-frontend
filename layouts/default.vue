@@ -4,7 +4,7 @@
 			<SidebarLeft />
 
 			<main
-				class="flex-1 ml-[25%] mr-[5%] xl:mr-[30%] h-full m-auto overflow-x-hidden outline outline-1 outline-zinc-800"
+				class="flex-1 ml-[25%] mr-[5%] xl:mr-[30%] h-full m-auto overflow-x-hidden outline outline-1 outline-zinc-700"
 			>
 				<slot />
 			</main>

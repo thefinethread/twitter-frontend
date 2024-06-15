@@ -1,17 +1,7 @@
 <template>
 	<header
-		class="fixed m-auto right-0 shadow-sm shadow-gray-700 top-0 left-0 h-20 bg-zinc-9500 z-10 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-90"
+		class="fixed left-1/4 right-[5%] xl:right-[30%] shadow-sm shadow-gray-700 top-0 h-14 z-20 backdrop-filter backdrop-blur bg-opacity-5 0"
 	>
-		<div class="max-w-5xl h-full m-auto flex items-center justify-between">
-			<NuxtLink to="/">
-				<img :src="TwitterLogo" alt="twitter" />
-			</NuxtLink>
-
-			<div></div>
-		</div>
+		<slot />
 	</header>
 </template>
-
-<script setup>
-import TwitterLogo from '@/assets/images/twitter-logo.svg';
-</script>

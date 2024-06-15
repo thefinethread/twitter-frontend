@@ -1,3 +1,7 @@
 <template>
-	<div>main</div>
+	<main>
+		<Header>
+			<FeedHeader />
+		</Header>
+	</main>
 </template>
