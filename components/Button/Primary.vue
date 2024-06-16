@@ -1,11 +1,26 @@
 <template>
 	<button
-		class="px-5 py-2 rounded-full bg-blue-500 hover:bg-opacity-90 transition-colors"
+		:class="[
+			bgColor,
+			width,
+			textColor,
+			'px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors font-medium',
+		]"
 	>
 		<slot />
 	</button>
 </template>
 
 <script setup>
-defineProps([]);
+defineProps({
+	bgColor: {
+		default: 'bg-sky-500',
+	},
+	textColor: {
+		default: 'text-zinc-50',
+	},
+	width: {
+		default: 'w-auto',
+	},
+});
 </script>
