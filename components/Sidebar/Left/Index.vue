@@ -9,11 +9,26 @@
 				</li>
 			</ul>
 
-			<SidebarLeftPostBtn />
+			<SidebarLeftPostBtn :click-handler="openModal" />
 		</nav>
 	</section>
+
+	<Modal
+		:close-modal="closeModal"
+		:is-modal-open="isModalOpen"
+		v-if="isModalOpen"
+	/>
 </template>
 
 <script setup>
 import { menu } from '~/constants/menu';
+
+const isModalOpen = ref(false);
+
+const openModal = () => {
+	isModalOpen.value = true;
+};
+const closeModal = () => {
+	isModalOpen.value = false;
+};
 </script>
