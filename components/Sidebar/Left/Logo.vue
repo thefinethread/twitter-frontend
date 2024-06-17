@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink to="/">
+	<NuxtLink to="/home">
 		<img :src="TwitterLogo" alt="twitter" class="bg-custom-hover" />
 	</NuxtLink>
 </template>

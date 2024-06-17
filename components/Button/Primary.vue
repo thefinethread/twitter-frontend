@@ -4,15 +4,17 @@
 			bgColor,
 			width,
 			textColor,
+			customClass,
 			'px-5 py-2 rounded-full hover:bg-opacity-90 transition-colors font-medium',
 		]"
+		@click="handleClick"
 	>
 		<slot />
 	</button>
 </template>
 
 <script setup>
-defineProps({
+const { handleClick } = defineProps({
 	bgColor: {
 		default: 'bg-sky-500',
 	},
@@ -21,6 +23,13 @@ defineProps({
 	},
 	width: {
 		default: 'w-auto',
+	},
+	customClass: {
+		default: '',
+	},
+	handleClick: {
+		type: Function,
+		default: () => {},
 	},
 });
 </script>

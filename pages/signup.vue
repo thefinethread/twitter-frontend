@@ -2,14 +2,15 @@
 	<section class="flex flex-col justify-center items-center">
 		<div>
 			<h2 class="text-4xl mb-10 text-left font-semibold leading-snug">
-				Sign in to X
+				Create your account
 			</h2>
 			<form class="sm:min-w-[28rem] w-80">
+				<InputText label="Name" />
 				<InputText label="Email" />
 				<InputText label="Password" type="password" />
 
 				<ButtonPrimary width="w-full" custom-class="py-3"
-					>Sign In</ButtonPrimary
+					>Sign Up</ButtonPrimary
 				>
 			</form>
 		</div>

@@ -7,6 +7,7 @@
 			textColor,
 			'px-5 py-2 rounded-full hover:bg-opacity-10 hover:bg-sky-500 transition-colors font-medium outline outline-[1px]',
 		]"
+		@click="handleClick"
 	>
 		<slot />
 	</button>
@@ -25,6 +26,10 @@ defineProps({
 	},
 	customClass: {
 		default: '',
+	},
+	handleClick: {
+		type: Function,
+		default: () => {},
 	},
 });
 </script>

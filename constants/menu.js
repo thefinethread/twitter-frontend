@@ -22,7 +22,7 @@ import {
 export const menu = [
 	{
 		label: 'Home',
-		to: '/',
+		to: '/home',
 		icon: HomeIcon,
 		activeIcon: HomeIconSolid,
 	},
