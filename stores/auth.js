@@ -5,7 +5,7 @@ const useAuthStore = defineStore('auth', () => {
 	const loading = ref(false);
 	const error = ref(null);
 
-	const { loginService } = useAuth();
+	const { loginService, signUpService } = useAuth();
 
 	const setUser = (value) => (user.value = value);
 	const setLoading = (value) => (loading.value = value);
@@ -25,11 +25,31 @@ const useAuthStore = defineStore('auth', () => {
 		}
 	};
 
+	const signUp = async (userData) => {
+		setLoading(true);
+		setError(null);
+
+		try {
+			const data = await signUpService(userData);
+			setUser(data);
+		} catch (err) {
+			setError(err.data.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	onUnmounted(() => {
+		setError(null);
+		setLoading(false);
+	});
+
 	return {
 		user,
 		error,
 		loading,
 		login,
+		signUp,
 	};
 });
 

@@ -8,7 +8,7 @@
 				<InputText v-model="email" label="Email" />
 				<InputText v-model="password" label="Password" type="password" />
 
-				<p v-if="error" class="mb-4 text-red-500">{{ error }}</p>
+				<MessageError :error="error" />
 				<ButtonPrimary width="w-full" custom-class="py-3">
 					<Loader v-if="loading" />
 					<p v-else>Sign In</p>
@@ -25,7 +25,6 @@ const email = ref('');
 const password = ref('');
 
 const authStore = useAuthStore();
-const { login } = authStore;
 const { user, loading, error } = storeToRefs(authStore);
 
 const handleSubmit = async () => {
@@ -38,7 +37,7 @@ const handleSubmit = async () => {
 		password: password.value,
 	};
 
-	await login(userData);
+	await authStore.login(userData);
 
 	if (user.value) navigateTo('/home');
 };
