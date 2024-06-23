@@ -6,7 +6,9 @@
 			<section
 				class="w-80 md:w-1/2 flex md:justify-center items-center -translate-x-3"
 			>
-				<img :src="TwitterLogo" alt="twitter" class="w-16 md:w-[28rem]" />
+				<NuxtLink to="/">
+					<img :src="TwitterLogo" alt="twitter" class="w-16 md:w-[28rem]" />
+				</NuxtLink>
 			</section>
 
 			<NuxtPage />

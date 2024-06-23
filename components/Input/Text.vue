@@ -3,6 +3,7 @@
 		<input
 			:type="type"
 			:id="label"
+			v-model="model"
 			class="w-full px-2.5 pb-2.5 pt-5 text-lg text-white bg-transparent outline outline-zinc-700 rounded-md focus:outline-2 focus:outline-sky-500 peer"
 			required
 		/>
@@ -15,7 +16,7 @@
 </template>
 
 <script setup>
-const { label } = defineProps({
+defineProps({
 	label: {
 		default: '',
 	},
@@ -23,4 +24,6 @@ const { label } = defineProps({
 		default: 'text',
 	},
 });
+
+const model = defineModel();
 </script>
