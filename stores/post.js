@@ -5,7 +5,7 @@ const usePostStore = defineStore('post', () => {
 	const loading = ref(false);
 	const error = ref(null);
 
-	const { getPostsService } = usePost();
+	const { getPostsService, createPostService } = usePost();
 
 	const setPosts = (value) => (posts.value = value);
 	const setLoading = (value) => (loading.value = value);
@@ -18,6 +18,19 @@ const usePostStore = defineStore('post', () => {
 			const data = await getPostsService();
 			setPosts(data);
 		} catch (err) {
+			setError(err.data.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const createPost = async (post) => {
+		initState();
+
+		try {
+			const { data, message } = await createPostService(post);
+		} catch (err) {
+			console.log(err);
 			setError(err.data.message);
 		} finally {
 			setLoading(false);
@@ -40,6 +53,7 @@ const usePostStore = defineStore('post', () => {
 		loading,
 		error,
 		getPosts,
+		createPost,
 		resetState,
 	};
 });

@@ -10,7 +10,7 @@
 
 				<MessageError :error="error" />
 				<ButtonPrimary width="w-full" custom-class="py-3">
-					<Loader v-if="true" />
+					<Loader v-if="loading" />
 					<p v-else>Sign In</p>
 				</ButtonPrimary>
 			</form>

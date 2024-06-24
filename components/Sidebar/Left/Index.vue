@@ -9,7 +9,7 @@
 				</li>
 			</ul>
 
-			<SidebarLeftPostBtn :click-handler="openModal" />
+			<SidebarLeftPostBtn :click-handler="goToComposePostPage" />
 		</nav>
 	</section>
 
@@ -22,6 +22,8 @@
 
 <script setup>
 import { menu } from '~/constants/menu';
+
+const goToComposePostPage = () => navigateTo('/compose/post');
 
 const isModalOpen = ref(false);
 

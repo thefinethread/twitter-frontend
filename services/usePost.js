@@ -8,7 +8,16 @@ const usePost = () => {
 		return res.data;
 	};
 
-	return { getPostsService };
+	const createPostService = async (post) => {
+		const res = await $api(`${API_PREFIX}`, {
+			method: 'POST',
+			body: post,
+		});
+
+		return res;
+	};
+
+	return { getPostsService, createPostService };
 };
 
 export default usePost;

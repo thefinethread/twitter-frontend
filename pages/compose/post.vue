@@ -1,29 +1,14 @@
 <template>
-	<div
-		@click="handleOverlayClick"
-		class="fixed left-0 h-full flex w-full bg-zinc-700 bg-opacity-50 justify-center items-start z-30"
-	>
-		<div
-			@click.stop
-			class="bg-zinc-950 rounded-2xl p-5 w-[40rem] flex flex-col justify-between items-start mt-10 mb-10 max-h-[46rem]"
-		>
-			<div class="w-full pb-4 backdrop-blur-xl backdrop-filter bg-opacity-50">
-				<button
-					@click="closeModal"
-					class="hover:bg-zinc-800 transition-colors p-1 rounded-full"
-				>
-					<XMarkIcon class="w-5" />
-				</button>
-			</div>
+	<div class="border-b p-4 pr-5 border-zinc-700 flex gap-3">
+		<img :src="GoogleLogo" alt="" class="w-10 h-10 rounded-full" />
 
-			<div class="flex gap-3 w-full min-h-24 py-2 overflow-y-scroll">
-				<slot />
-				<img :src="GoogleLogo" alt="" class="w-10 h-10 rounded-full" />
+		<form @submit.prevent="handleSubmit" class="flex-1 h-[calc(100%_-_40px)]">
+			<div class="flex gap-3 w-full py-2 overflow-y-scroll max-h-full">
 				<div class="flex-1">
 					<div
 						ref="inputRef"
 						contenteditable
-						class="text-white text-lg placeholder outline-none translate-y-1"
+						class="text-zinc-200 text-lg placeholder outline-none translate-y-1"
 						:data-placeholder="'What is happening?!'"
 					></div>
 
@@ -60,29 +45,41 @@
 					</li>
 				</ul>
 
-				<ButtonPrimary> Post </ButtonPrimary>
+				<ButtonPrimary height="h-9" width="w-20">
+					<Loader height="h-6" v-if="loading" />
+					<p v-else>Post</p>
+				</ButtonPrimary>
 			</div>
-		</div>
+		</form>
 	</div>
 </template>
 
 <script setup>
 import { XMarkIcon, PhotoIcon } from '@heroicons/vue/24/outline';
 import GoogleLogo from '~/assets/images/Google.jpg';
+import usePostStore from '~/stores/post';
 
 const inputRef = ref(null);
 const imageUpload = ref(null);
 
-const { isModalOpen, closeModal } = defineProps(['isModalOpen', 'closeModal']);
+const postStore = usePostStore();
+const { loading, error } = storeToRefs(postStore);
+
+const handleSubmit = async () => {
+	const content = inputRef.value.innerText;
+
+	if (!content) return;
+
+	await postStore.createPost({ content });
+	console.log(error);
+
+	if (!error.value) navigateTo('/home');
+};
 
 const focusInput = () => {
 	if (inputRef.value) {
 		inputRef.value.focus();
 	}
-};
-
-const handleOverlayClick = () => {
-	closeModal();
 };
 
 const handleFileChange = (event) => {

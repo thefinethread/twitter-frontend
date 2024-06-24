@@ -14,9 +14,10 @@
 					</button>
 				</div>
 				<div>
-					<p class="font-normal text-zinc-200 text-[15px] leading-5">
-						{{ content }}
-					</p>
+					<p
+						class="font-normal text-zinc-200 text-[15px] leading-5"
+						v-html="formattedContent"
+					></p>
 				</div>
 			</div>
 
@@ -31,4 +32,8 @@ import { EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
 import GoogleLogo from '../../assets/images/Google.jpg';
 const { post } = defineProps(['post']);
 const { id, content, createdAt, user } = post;
+
+const formattedContent = computed(() => {
+	return content.replaceAll(`\n`, '<br>');
+});
 </script>

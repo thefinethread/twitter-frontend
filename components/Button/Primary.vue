@@ -3,9 +3,10 @@
 		:class="[
 			bgColor,
 			width,
+			height,
 			textColor,
 			customClass,
-			'px-5 py-2 h-14 flex justify-center items-center rounded-full hover:bg-opacity-90 transition-colors font-medium',
+			'px-5 py-2 flex justify-center items-center rounded-full hover:bg-opacity-90 transition-colors font-medium',
 		]"
 		@click="handleClick"
 	>
@@ -23,6 +24,9 @@ const { handleClick } = defineProps({
 	},
 	width: {
 		default: 'w-auto',
+	},
+	height: {
+		default: 'h-14',
 	},
 	customClass: {
 		default: '',
