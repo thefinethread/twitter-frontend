@@ -25,6 +25,7 @@ const email = ref('');
 const password = ref('');
 
 const authStore = useAuthStore();
+const { setLoading, setError, login } = authStore;
 const { user, loading, error } = storeToRefs(authStore);
 
 const handleSubmit = async () => {
@@ -37,10 +38,15 @@ const handleSubmit = async () => {
 		password: password.value,
 	};
 
-	await authStore.login(userData);
+	await login(userData);
 
 	if (user.value) navigateTo('/home');
 };
+
+onUnmounted(() => {
+	setError(null);
+	setLoading(false);
+});
 
 definePageMeta({ layout: 'auth' });
 </script>

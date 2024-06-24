@@ -21,6 +21,11 @@ const useAuth = () => {
 		return res.data;
 	};
 
-	return { loginService, signUpService };
+	const getCurrentUserService = async () => {
+		const res = await $api(`${API_PREFIX}/get-me`);
+		return res.data;
+	};
+
+	return { loginService, signUpService, getCurrentUserService };
 };
 export default useAuth;
