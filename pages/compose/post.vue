@@ -65,15 +65,19 @@ const imageUpload = ref(null);
 const postStore = usePostStore();
 const { loading, error } = storeToRefs(postStore);
 
+const { $toast } = useNuxtApp();
+
 const handleSubmit = async () => {
 	const content = inputRef.value.innerText;
 
 	if (!content) return;
 
 	await postStore.createPost({ content });
-	console.log(error);
 
-	if (!error.value) navigateTo('/home');
+	if (!error.value) {
+		$toast.success('Created post!');
+		navigateTo('/home');
+	}
 };
 
 const focusInput = () => {

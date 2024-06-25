@@ -3,6 +3,7 @@ import usePost from '~/services/usePost';
 const usePostStore = defineStore('post', () => {
 	const posts = ref([]);
 	const loading = ref(false);
+	const message = ref(null);
 	const error = ref(null);
 
 	const { getPostsService, createPostService } = usePost();
@@ -10,6 +11,7 @@ const usePostStore = defineStore('post', () => {
 	const setPosts = (value) => (posts.value = value);
 	const setLoading = (value) => (loading.value = value);
 	const setError = (value) => (error.value = value);
+	const setMessage = (value) => (message.value = value);
 
 	const getPosts = async () => {
 		initState();
@@ -29,6 +31,7 @@ const usePostStore = defineStore('post', () => {
 
 		try {
 			const { data, message } = await createPostService(post);
+			setMessage(message);
 		} catch (err) {
 			console.log(err);
 			setError(err.data.message);
@@ -40,6 +43,7 @@ const usePostStore = defineStore('post', () => {
 	const initState = () => {
 		setError(null);
 		setLoading(true);
+		setMessage(null);
 	};
 
 	const resetState = () => {
@@ -51,6 +55,7 @@ const usePostStore = defineStore('post', () => {
 	return {
 		posts,
 		loading,
+		message,
 		error,
 		getPosts,
 		createPost,
