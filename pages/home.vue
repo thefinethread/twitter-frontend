@@ -17,7 +17,7 @@ const postStore = usePostStore();
 const { getPosts, resetState } = postStore;
 const { posts, loading, error } = storeToRefs(postStore);
 
-onMounted(() => {
+onBeforeMount(() => {
 	getPosts();
 });
 

@@ -34,25 +34,25 @@ export const menu = [
 	},
 	{
 		label: 'Notifications',
-		to: '/notifications',
+		to: '/#',
 		icon: BellIcon,
 		activeIcon: BellIconSolid,
 	},
 	{
 		label: 'Messages',
-		to: '/messages',
+		to: '/#',
 		icon: EnvelopeIcon,
 		activeIcon: EnvelopeIconSolid,
 	},
 	{
 		label: 'Lists',
-		to: '/lists',
+		to: '/#',
 		icon: QueueListIcon,
 		activeIcon: QueueListIconSolid,
 	},
 	{
 		label: 'Bookmarks',
-		to: '/bookmarks',
+		to: '/#',
 		icon: BookmarkIcon,
 		activeIcon: BookmarkIconSolid,
 	},
@@ -64,7 +64,7 @@ export const menu = [
 	},
 	{
 		label: 'Profile',
-		to: '/profile',
+		to: '/#',
 		icon: UserIcon,
 		activeIcon: UserIconSolid,
 	},
