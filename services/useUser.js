@@ -11,7 +11,25 @@ const useUser = () => {
 		return res.data;
 	};
 
-	return { searchUserService };
+	const followUserService = async (followingId) => {
+		const res = await $api(`${API_PREFIX}/follow`, {
+			method: 'POST',
+			query: { followingId },
+		});
+
+		return res.data;
+	};
+
+	const UnFollowUserService = async (followingId) => {
+		const res = await $api(`${API_PREFIX}/unfollow`, {
+			method: 'DELETE',
+			query: { followingId },
+		});
+
+		return res.data;
+	};
+
+	return { searchUserService, followUserService, UnFollowUserService };
 };
 
 export default useUser;

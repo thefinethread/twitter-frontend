@@ -4,8 +4,12 @@
 			customClass,
 			outlineColor,
 			width,
+			height,
 			textColor,
-			'px-5 py-2 rounded-full hover:bg-opacity-10 hover:bg-sky-500 transition-colors font-medium outline outline-[1px]',
+			hoverBgColor,
+			hoverTextColor,
+			hoverOutlineColor,
+			'px-5 py-2 flex justify-center items-center  rounded-full hover:bg-opacity-10 transition-colors font-medium outline outline-[1px]',
 		]"
 		@click="handleClick"
 	>
@@ -24,7 +28,19 @@ defineProps({
 	width: {
 		default: 'w-auto',
 	},
+	height: {
+		default: 'h-14',
+	},
 	customClass: {
+		default: '',
+	},
+	hoverTextColor: {
+		default: '',
+	},
+	hoverBgColor: {
+		default: 'hover:bg-sky-500',
+	},
+	hoverOutlineColor: {
 		default: '',
 	},
 	handleClick: {

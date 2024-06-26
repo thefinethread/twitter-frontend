@@ -1,7 +1,7 @@
 <template>
 	<div class="border-b p-4 border-zinc-600 flex items-start gap-2">
 		<img :src="GoogleLogo" class="w-10 rounded-full" />
-		<div class="flex flex-col gap-4">
+		<div class="flex flex-1 flex-col gap-4">
 			<div>
 				<div class="flex justify-between items-center">
 					<div>
