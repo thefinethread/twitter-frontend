@@ -1,3 +1,3 @@
 <template>
-	<div>posts</div>
+	<div>likes</div>
 </template>

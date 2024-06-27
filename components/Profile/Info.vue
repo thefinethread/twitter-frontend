@@ -1,5 +1,5 @@
 <template>
-	<div class="md:h-[26rem] h-[22rem] flex flex-col relative mb-2">
+	<div class="md:h-[26rem] h-[22rem] flex flex-col relative mb-5">
 		<img
 			:src="GoogleLogo"
 			alt=""

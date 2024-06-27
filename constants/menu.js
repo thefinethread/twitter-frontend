@@ -18,6 +18,9 @@ import {
 	UserGroupIcon as UserGroupIconSolid,
 	UserIcon as UserIconSolid,
 } from '@heroicons/vue/24/solid';
+import useAuthStore from '~/stores/auth';
+
+const { user } = useAuthStore();
 
 export const menu = [
 	{
@@ -64,7 +67,7 @@ export const menu = [
 	},
 	{
 		label: 'Profile',
-		to: '/profile',
+		to: `/${user.username}`,
 		icon: UserIcon,
 		activeIcon: UserIconSolid,
 	},
