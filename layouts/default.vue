@@ -4,12 +4,12 @@
 			<SidebarLeft />
 
 			<main
-				class="flex-1 ml-[25%] mr-[5%] xl:mr-[30%] h-full m-auto overflow-x-hidden outline outline-1 outline-zinc-700"
+				class="flex-1 ml-[25%] mr-[5%] md:mr-[15%] lg:mr-[30%] h-full m-auto overflow-x-hidden outline outline-1 outline-zinc-700"
 			>
 				<slot />
 			</main>
 
-			<SidebarRight class="hidden xl:block" />
+			<SidebarRight class="hidden lg:block" />
 		</div>
 	</div>
 </template>

@@ -64,7 +64,7 @@ export const menu = [
 	},
 	{
 		label: 'Profile',
-		to: '/#',
+		to: '/profile',
 		icon: UserIcon,
 		activeIcon: UserIconSolid,
 	},
