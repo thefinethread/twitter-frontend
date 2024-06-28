@@ -17,7 +17,7 @@ const useAuthStore = defineStore('auth', () => {
 			const data = await loginService(userData);
 			setUser(data);
 		} catch (err) {
-			setError(err.data.message);
+			setError(err?.data?.message);
 		} finally {
 			setLoading(false);
 		}
@@ -42,7 +42,7 @@ const useAuthStore = defineStore('auth', () => {
 		try {
 			const data = await getCurrentUserService();
 			setUser(data);
-			navigateTo('/home');
+			// navigateTo('/home');
 		} catch (err) {
 			setError(err.data.message);
 		} finally {
@@ -60,6 +60,7 @@ const useAuthStore = defineStore('auth', () => {
 		error,
 		loading,
 		login,
+		setUser,
 		setLoading,
 		setError,
 		signUp,

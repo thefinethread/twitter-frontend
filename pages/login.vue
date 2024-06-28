@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import useAuthStore from '../stores/auth';
+import useAuthStore from '~/stores/auth';
 
 const email = ref('');
 const password = ref('');

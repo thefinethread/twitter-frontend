@@ -19,5 +19,5 @@ const { label, icon: Icon, to, activeIcon: ActiveIcon } = navlink;
 
 const route = useRoute();
 
-const isActive = computed(() => route.path === to);
+const isActive = computed(() => route.path.startsWith(to));
 </script>

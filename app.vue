@@ -5,11 +5,11 @@
 </template>
 
 <script setup>
-import useAuthStore from './stores/auth';
+// import useAuthStore from './stores/auth';
 
-const authStore = useAuthStore();
+// const authStore = useAuthStore();
 
-onBeforeMount(() => {
-	authStore.getCurrentUser();
-});
+// onBeforeMount(() => {
+// 	authStore.getCurrentUser();
+// });
 </script>

@@ -1,15 +1,15 @@
 import useAuthStore from '~/stores/auth';
 
-const publicRoutes = ['/login', '/signup', '/'];
+const publicRoutes = ['/login', '/signup', '/', '/login-error'];
 
 export default defineNuxtRouteMiddleware((to, from) => {
-	const { user } = useAuthStore();
+	const authStore = useAuthStore();
+	const { user } = storeToRefs(authStore);
 
-	if (!user && !publicRoutes.includes(to.fullPath)) {
+	if (!user.value && !publicRoutes.includes(to.fullPath)) {
 		return navigateTo('/login');
 	}
-
-	if (user && publicRoutes.includes(to.fullPath)) {
-		return navigateTo('/home');
+	if (user.value && publicRoutes.includes(to.fullPath)) {
+		return navigateTo(to.fullPath);
 	}
 });

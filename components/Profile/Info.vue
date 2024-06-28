@@ -21,15 +21,19 @@
 				>Edit profile</ButtonSecondary
 			>
 
-			<h3 class="text-2xl font-semibold">John Doe</h3>
-			<span class="opacity-40 text-base mb-2">@johndoe</span>
+			<h3 class="text-2xl font-semibold">{{ name }}</h3>
+			<span class="opacity-40 text-base mb-2">@{{ username }}</span>
 			<div class="opacity-40 text-base mb-2 flex items-center gap-1">
 				<CalendarDaysIcon class="w-5" />
-				<p>Joined February 2024</p>
+				<p>Joined {{ createdAt }}</p>
 			</div>
 			<div class="text-base flex items-center gap-4">
-				<div class="text-sm">6<span class="opacity-40"> Following</span></div>
-				<div class="text-sm">0<span class="opacity-40"> Followers</span></div>
+				<div class="text-sm">
+					{{ followingCount }}<span class="opacity-40"> Following</span>
+				</div>
+				<div class="text-sm">
+					{{ followersCount }}<span class="opacity-40"> Followers</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -38,4 +42,7 @@
 <script setup>
 import { CalendarDaysIcon } from '@heroicons/vue/24/outline';
 import GoogleLogo from '~/assets/images/google.jpg';
+
+const { user } = defineProps(['user']);
+const { name, username, createdAt, followingCount, followersCount } = user;
 </script>

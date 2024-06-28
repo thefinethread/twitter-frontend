@@ -11,6 +11,12 @@ const useUser = () => {
 		return res.data;
 	};
 
+	const getProfileService = async (userId) => {
+		const res = await $api(`${API_PREFIX}/profile/${userId}`);
+
+		return res.data;
+	};
+
 	const followUserService = async (followingId) => {
 		const res = await $api(`${API_PREFIX}/follow`, {
 			method: 'POST',
@@ -29,7 +35,12 @@ const useUser = () => {
 		return res.data;
 	};
 
-	return { searchUserService, followUserService, UnFollowUserService };
+	return {
+		searchUserService,
+		getProfileService,
+		followUserService,
+		UnFollowUserService,
+	};
 };
 
 export default useUser;

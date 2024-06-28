@@ -8,6 +8,11 @@ const usePost = () => {
 		return res.data;
 	};
 
+	const getPostsByUsernameService = async (username) => {
+		const res = await $api(`${API_PREFIX}/list`, { query: { username } });
+		return res.data;
+	};
+
 	const createPostService = async (post) => {
 		const res = await $api(`${API_PREFIX}`, {
 			method: 'POST',
@@ -17,7 +22,7 @@ const usePost = () => {
 		return res;
 	};
 
-	return { getPostsService, createPostService };
+	return { getPostsService, getPostsByUsernameService, createPostService };
 };
 
 export default usePost;

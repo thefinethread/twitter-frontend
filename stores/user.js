@@ -1,13 +1,19 @@
 import useUser from '~/services/useUser';
 
 const useUserStore = defineStore('user', () => {
+	const user = ref(null);
 	const searchedUsers = ref([]);
 	const error = ref(null);
 	const loading = ref(false);
 
-	const { searchUserService, followUserService, UnFollowUserService } =
-		useUser();
+	const {
+		searchUserService,
+		getProfileService,
+		followUserService,
+		UnFollowUserService,
+	} = useUser();
 
+	const setUser = (value) => (user.value = value);
 	const setSearchedUsers = (value) => (searchedUsers.value = value);
 	const setError = (value) => (error.value = value);
 	const setLoading = (value) => (loading.value = value);
@@ -20,6 +26,19 @@ const useUserStore = defineStore('user', () => {
 			setSearchedUsers(data);
 		} catch (err) {
 			setError(err.data.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	const getProfile = async (userId) => {
+		initState();
+
+		try {
+			const data = await getProfileService(userId);
+			setUser(data);
+		} catch (err) {
+			setError(err?.data?.message);
 		} finally {
 			setLoading(false);
 		}
@@ -69,12 +88,21 @@ const useUserStore = defineStore('user', () => {
 		setLoading(false);
 	};
 
+	const resetUserState = () => {
+		setUser(null);
+		setError(null);
+		setLoading(false);
+	};
+
 	return {
 		searchedUsers,
 		loading,
 		error,
+		user,
 		searchUser,
+		getProfile,
 		resetSearchedUserState,
+		resetUserState,
 		followUser,
 		UnFollowUser,
 	};
