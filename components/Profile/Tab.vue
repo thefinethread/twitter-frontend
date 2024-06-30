@@ -9,7 +9,9 @@
 <script setup>
 import { profileTabs } from '~/constants/tabs';
 
-const { username } = useRoute().params;
+const route = useRoute();
+
+const { username } = route.params;
 
 const changeSubProfileRoute = () => {
 	const activeTab = profileTabs.find((tab) => tab.id === activeTabId.value);
@@ -17,4 +19,11 @@ const changeSubProfileRoute = () => {
 };
 
 const { activeTabId, handleClick } = useTabs(1, changeSubProfileRoute);
+
+watch(
+	() => route.params.username,
+	(newUsername, oldUsername) => {
+		if (newUsername !== oldUsername) activeTabId.value = 1;
+	}
+);
 </script>
