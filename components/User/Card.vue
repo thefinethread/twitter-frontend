@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink :to="`/user/${user.username}`">
+	<NuxtLink :to="`/${user.username}`">
 		<div class="w-full flex justify-between items-center px-6 py-4">
 			<div class="flex items-center gap-3">
 				<img :src="GoogleLogo" alt="" class="w-10 rounded-full" />

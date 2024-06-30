@@ -17,6 +17,18 @@ const useUser = () => {
 		return res.data;
 	};
 
+	const getFollowersService = async (username) => {
+		const res = await $api(`${API_PREFIX}/${username}/followers`);
+
+		return res.data;
+	};
+
+	const getFollowingService = async (username) => {
+		const res = await $api(`${API_PREFIX}/${username}/following`);
+
+		return res.data;
+	};
+
 	const followUserService = async (followingId) => {
 		const res = await $api(`${API_PREFIX}/follow`, {
 			method: 'POST',
@@ -38,6 +50,8 @@ const useUser = () => {
 	return {
 		searchUserService,
 		getProfileService,
+		getFollowersService,
+		getFollowingService,
 		followUserService,
 		UnFollowUserService,
 	};
