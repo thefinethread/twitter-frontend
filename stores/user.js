@@ -1,4 +1,5 @@
 import useUser from '~/services/useUser';
+import useAuthStore from '~/stores/auth';
 
 const useUserStore = defineStore('user', () => {
 	const user = ref(null);
@@ -14,6 +15,9 @@ const useUserStore = defineStore('user', () => {
 		followUserService,
 		UnFollowUserService,
 	} = useUser();
+
+	const authStore = useAuthStore();
+	const { user: authUser } = storeToRefs(authStore);
 
 	const setUser = (value) => (user.value = value);
 	const setUserList = (value) => (userList.value = value);
@@ -82,7 +86,7 @@ const useUserStore = defineStore('user', () => {
 
 			userList.value[index].isFollowing = true;
 
-			if (user.value) {
+			if (user.value && authUser.id === user.id) {
 				user.value.followingCount += 1;
 			}
 		} catch (err) {
@@ -100,7 +104,7 @@ const useUserStore = defineStore('user', () => {
 
 			userList.value[index].isFollowing = false;
 
-			if (user.value) {
+			if (user.value && authUser.id === user.id) {
 				user.value.followingCount -= 1;
 			}
 		} catch (err) {

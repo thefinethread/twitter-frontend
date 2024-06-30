@@ -6,27 +6,27 @@ const profileTabs = [
 	{
 		id: 1,
 		title: 'Posts',
-		to: `/${user.username}`,
+		navigationSuffix: ``,
 	},
 	{
 		id: 2,
 		title: 'Following',
-		to: `/${user.username}/following`,
+		navigationSuffix: `following`,
 	},
 	{
 		id: 3,
 		title: 'Followers',
-		to: `/${user.username}/followers`,
+		navigationSuffix: `followers`,
 	},
 	{
 		id: 4,
 		title: 'Likes',
-		to: `/${user.username}/likes`,
+		navigationSuffix: `likes`,
 	},
 	{
 		id: 5,
 		title: 'Replies',
-		to: `/${user.username}/replies`,
+		navigationSuffix: `replies`,
 	},
 ];
 
