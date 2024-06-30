@@ -20,10 +20,10 @@
 			<Loader />
 		</div>
 
-		<UserCard v-for="user in searchedUsers" :user="user" />
+		<UserCard v-for="user in userList" :user="user" />
 
 		<Message
-			v-if="!searchedUsers.length"
+			v-if="!userList.length"
 			message="Search your friends to follow"
 			custom-class="opacity-50 mt-10"
 			size="text-2xl"
@@ -38,15 +38,15 @@ import useUserStore from '~/stores/user';
 const searchTerm = ref('');
 
 const userStore = useUserStore();
-const { searchedUsers, loading, error } = storeToRefs(userStore);
+const { userList, loading, error } = storeToRefs(userStore);
 
 const handleSubmit = async () => {
-	if (!searchTerm.value && searchTerm.value.length < 1) return;
+	if (!searchTerm.value.length) return;
 
 	await userStore.searchUser(searchTerm.value);
 };
 
 onBeforeUnmount(() => {
-	userStore.resetSearchedUserState();
+	userStore.resetUserListState();
 });
 </script>

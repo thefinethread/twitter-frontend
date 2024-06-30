@@ -6,7 +6,7 @@
 			<Message :message="error" />
 		</div> -->
 
-		<UserCard v-else v-for="user in following" :user="user" />
+		<UserCard v-else v-for="user in userList" :user="user" />
 	</div>
 </template>
 
@@ -16,14 +16,14 @@ import useUserStore from '~/stores/user';
 const { username } = useRoute().params;
 
 const userStore = useUserStore();
-const { getFollowing, resetFollowingState } = userStore;
-const { following, loading, error } = storeToRefs(userStore);
+const { getFollowing, resetUserListState } = userStore;
+const { userList, loading, error } = storeToRefs(userStore);
 
 onBeforeMount(() => {
 	if (username) getFollowing(username);
 });
 
 onBeforeUnmount(() => {
-	resetFollowingState();
+	resetUserListState();
 });
 </script>
