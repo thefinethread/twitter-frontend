@@ -1,12 +1,12 @@
 <template>
-	<p v-if="message" :class="[color, size, customClass, 'text-center']">
+	<div :class="[color, size, customClass, 'text-center']">
 		{{ message }}
-	</p>
+		<slot />
+	</div>
 </template>
 
 <script setup>
 defineProps({
-	message: {},
 	color: {
 		default: 'text-zinc-300',
 	},

@@ -1,16 +1,14 @@
 <template>
-	<div>
-		<NuxtLink
-			:to="to"
-			:class="[
-				isActive ? 'font-medium' : 'text-opacity-60 text-zinc-50',
-				'flex gap-4 justify-start items-center bg-custom-hover',
-			]"
-		>
-			<component :is="isActive ? ActiveIcon : Icon" class="w-7"></component>
-			<div class="text-xl hidden xl:block">{{ label }}</div>
-		</NuxtLink>
-	</div>
+	<NuxtLink
+		:to="to"
+		:class="[
+			isActive ? 'font-medium' : 'text-opacity-60 text-zinc-50',
+			'flex gap-4 justify-start items-center bg-custom-hover',
+		]"
+	>
+		<component :is="isActive ? ActiveIcon : Icon" class="w-7"></component>
+		<div class="text-xl hidden xl:block">{{ label }}</div>
+	</NuxtLink>
 </template>
 
 <script setup>

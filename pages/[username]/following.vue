@@ -5,6 +5,14 @@
 		<div v-else-if="error" class="text-center">
 			<Message :message="error" />
 		</div> -->
+		<Message
+			v-else-if="!userList?.length"
+			size="text-xl"
+			custom-class="opacity-40 mt-10"
+		>
+			<h4 class="text-3xl">You are not following anyone yet.</h4>
+			<p class="text-lg">Start following people to see their posts!</p>
+		</Message>
 
 		<UserCard v-else v-for="user in userList" :user="user" />
 	</div>

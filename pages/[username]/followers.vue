@@ -6,6 +6,15 @@
 			<Message :message="error" />
 		</div> -->
 
+		<Message
+			v-else-if="!userList?.length"
+			size="text-xl"
+			custom-class="opacity-40 mt-10"
+		>
+			<h4 class="text-3xl">You have no followers yet.</h4>
+			<p class="text-lg">Share your profile to gain followers!</p>
+		</Message>
+
 		<UserCard v-else v-for="user in userList" :user="user" />
 	</div>
 </template>

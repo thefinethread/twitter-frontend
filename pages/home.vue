@@ -6,6 +6,15 @@
 			<Message :message="error" />
 		</div>
 
+		<Message
+			v-else-if="!posts?.length"
+			size="text-xl"
+			custom-class="opacity-40 mt-10"
+		>
+			<h4 class="text-3xl">No posts to display.</h4>
+			<p class="text-base">Start following people or create your own post!</p>
+		</Message>
+
 		<PostCard v-else v-for="post in posts" :post="post" />
 	</div>
 </template>

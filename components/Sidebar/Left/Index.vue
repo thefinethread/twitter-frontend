@@ -1,36 +1,42 @@
 <template>
 	<section class="fixed top-0 left-0 h-full w-1/4">
-		<nav class="absolute right-5 xl:right-20 top-0 bottom-0 p-3">
-			<SidebarLeftLogo />
+		<nav
+			class="absolute right-5 xl:right-20 top-0 bottom-0 p-3 flex flex-col justify-between"
+		>
+			<div>
+				<SidebarLeftLogo />
 
-			<ul class="flex flex-col gap-3 my-6">
-				<li v-for="navlink in menu">
-					<SidebarLeftTab :navlink="navlink" />
-				</li>
-			</ul>
+				<ul class="flex flex-col gap-3 my-6">
+					<li v-for="navlink in menu">
+						<SidebarLeftTab :navlink="navlink" />
+					</li>
+				</ul>
 
-			<SidebarLeftPostBtn :click-handler="goToComposePostPage" />
+				<SidebarLeftPostBtn :click-handler="goToComposePostPage" />
+			</div>
+
+			<SidebarLeftLogout @click="logoutUser" />
 		</nav>
 	</section>
 
-	<Modal
-		:close-modal="closeModal"
-		:is-modal-open="isModalOpen"
-		v-if="isModalOpen"
-	/>
+	<div
+		v-if="loading"
+		class="fixed top-0 left-0 right-0 bottom-0 bg-zinc-950 opacity-50 z-30"
+	>
+		<Loader />
+	</div>
 </template>
 
 <script setup>
 import { menu } from '~/constants/menu';
+import useAuthStore from '~/stores/auth';
+
+const authStore = useAuthStore();
+const { loading } = storeToRefs(authStore);
 
 const goToComposePostPage = () => navigateTo('/compose/post');
 
-const isModalOpen = ref(false);
-
-const openModal = () => {
-	isModalOpen.value = true;
-};
-const closeModal = () => {
-	isModalOpen.value = false;
+const logoutUser = () => {
+	authStore.logout();
 };
 </script>

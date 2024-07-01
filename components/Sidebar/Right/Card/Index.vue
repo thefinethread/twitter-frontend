@@ -1,5 +1,5 @@
 <template>
-	<div class="outline outline-zinc-700 p-4 rounded-md my-4 w-[90%]">
+	<div class="outline outline-zinc-800 p-4 rounded-md my-4 w-[90%]">
 		<h2 class="text-2xl font-semibold mb-5">{{ heading }}</h2>
 
 		<ul>

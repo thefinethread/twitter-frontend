@@ -25,7 +25,7 @@
 			<span class="opacity-40 text-base mb-2">@{{ user.username }}</span>
 			<div class="opacity-40 text-base mb-2 flex items-center gap-1">
 				<CalendarDaysIcon class="w-5" />
-				<p>Joined {{ user.createdAt }}</p>
+				<p>Joined {{ formattedCreatedDate }}</p>
 			</div>
 			<div class="text-base flex items-center gap-4">
 				<div class="text-sm">
@@ -40,8 +40,13 @@
 </template>
 
 <script setup>
+import moment from 'moment';
 import { CalendarDaysIcon } from '@heroicons/vue/24/outline';
 import GoogleLogo from '~/assets/images/google.jpg';
 
 const { user } = defineProps(['user']);
+
+const formattedCreatedDate = computed(() =>
+	moment(user.createdAt).format('MMMM YYYY')
+);
 </script>

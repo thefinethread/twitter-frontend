@@ -5,7 +5,8 @@ const useAuthStore = defineStore('auth', () => {
 	const loading = ref(false);
 	const error = ref(null);
 
-	const { loginService, signUpService, getCurrentUserService } = useAuth();
+	const { loginService, signUpService, getCurrentUserService, logoutService } =
+		useAuth();
 
 	const setUser = (value) => (user.value = value);
 	const setLoading = (value) => (loading.value = value);
@@ -50,6 +51,22 @@ const useAuthStore = defineStore('auth', () => {
 		}
 	};
 
+	const logout = async () => {
+		initState();
+
+		try {
+			await logoutService();
+
+			setUser(null);
+
+			navigateTo('/');
+		} catch (err) {
+			setError(err?.data.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
 	const initState = () => {
 		setLoading(true);
 		setError(null);
@@ -60,6 +77,7 @@ const useAuthStore = defineStore('auth', () => {
 		error,
 		loading,
 		login,
+		logout,
 		setUser,
 		setLoading,
 		setError,
