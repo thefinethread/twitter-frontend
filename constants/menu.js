@@ -67,7 +67,7 @@ export const menu = [
 	},
 	{
 		label: 'Profile',
-		to: `/${user.username}`,
+		to: ``,
 		icon: UserIcon,
 		activeIcon: UserIconSolid,
 	},

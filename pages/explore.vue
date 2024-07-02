@@ -24,10 +24,10 @@
 
 		<Message
 			v-if="!userList.length"
-			message="Search your friends to follow"
 			custom-class="opacity-50 mt-10"
 			size="text-2xl"
-		/>
+			>Search your friends to follow
+		</Message>
 	</div>
 </template>
 

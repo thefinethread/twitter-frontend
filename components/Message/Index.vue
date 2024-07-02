@@ -1,6 +1,5 @@
 <template>
 	<div :class="[color, size, customClass, 'text-center']">
-		{{ message }}
 		<slot />
 	</div>
 </template>

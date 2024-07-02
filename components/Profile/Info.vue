@@ -11,7 +11,7 @@
 		</div>
 
 		<div class="flex-1 flex flex-col justify-end px-4 relative">
-			<ButtonSecondary
+			<!-- <ButtonSecondary
 				width="w-32"
 				height="h-9"
 				text-color="text-zinc-100"
@@ -19,7 +19,7 @@
 				hover-bg-color="hover:bg-zinc-300"
 				custom-class="absolute right-4 top-4"
 				>Edit profile</ButtonSecondary
-			>
+			> -->
 
 			<h3 class="text-2xl font-semibold">{{ user.name }}</h3>
 			<span class="opacity-40 text-base mb-2">@{{ user.username }}</span>

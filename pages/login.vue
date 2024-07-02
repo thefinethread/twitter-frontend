@@ -9,7 +9,11 @@
 				<InputText v-model="password" label="Password" type="password" />
 
 				<MessageError :error="error" />
-				<ButtonPrimary width="w-full" custom-class="py-3">
+				<ButtonPrimary
+					:disabled="isSubmitDisabled"
+					width="w-full"
+					custom-class="py-3"
+				>
 					<Loader v-if="loading" />
 					<p v-else>Sign In</p>
 				</ButtonPrimary>
@@ -23,6 +27,8 @@ import useAuthStore from '~/stores/auth';
 
 const email = ref('');
 const password = ref('');
+
+const isSubmitDisabled = ref(true);
 
 const authStore = useAuthStore();
 const { setLoading, setError, login } = authStore;
@@ -42,6 +48,10 @@ const handleSubmit = async () => {
 
 	if (user.value) navigateTo('/home');
 };
+
+watch([email, password], ([newEmail, newPassword]) => {
+	isSubmitDisabled.value = !newEmail || !newPassword;
+});
 
 onUnmounted(() => {
 	setError(null);

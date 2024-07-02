@@ -39,7 +39,9 @@ import GoogleLogo from '../../assets/images/Google.jpg';
 const { post } = defineProps(['post']);
 
 const formattedContent = computed(() => {
-	return post.content.replaceAll(`\n`, '<br>');
+	return post.content
+		.replace(/\n{3,}/g, '<br><br>') // Replace 3 or more consecutive newlines with 2 <br> tags
+		.replace(/\n/g, '<br>'); // replace remaining newlines with <br>
 });
 
 const formattedPostDate = computed(() => formatDate(post.createdAt));

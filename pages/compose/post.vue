@@ -75,9 +75,13 @@ const handleSubmit = async () => {
 	await postStore.createPost({ content });
 
 	if (!error.value) {
-		$toast.success('Created post!');
-		navigateTo('/home');
+		$toast.success('Post created successfully!');
+		resetInputs();
 	}
+};
+
+const resetInputs = () => {
+	inputRef.value.innerText = '';
 };
 
 const focusInput = () => {

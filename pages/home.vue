@@ -2,9 +2,9 @@
 	<div class="h-full">
 		<Loader v-if="loading" />
 
-		<div v-else-if="error" class="text-center">
+		<!-- <div v-else-if="error" class="text-center">
 			<Message :message="error" />
-		</div>
+		</div> -->
 
 		<Message
 			v-else-if="!posts?.length"

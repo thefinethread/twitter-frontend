@@ -2,9 +2,9 @@
 	<div>
 		<Loader v-if="loading" />
 
-		<div v-else-if="error" class="text-center">
+		<!-- <div v-else-if="error" class="text-center">
 			<Message :message="error" />
-		</div>
+		</div> -->
 
 		<PostCard v-else v-for="post in posts" :post="post" />
 	</div>

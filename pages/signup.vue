@@ -11,7 +11,11 @@
 				<InputText v-model="password" label="Password" type="password" />
 
 				<MessageError :error="error" />
-				<ButtonPrimary width="w-full" custom-class="py-3">
+				<ButtonPrimary
+					:disabled="isSubmitDisabled"
+					width="w-full"
+					custom-class="py-3"
+				>
 					<Loader v-if="loading" />
 					<p v-else>Sign Up</p>
 				</ButtonPrimary>
@@ -27,6 +31,8 @@ const name = ref('');
 const email = ref('');
 const username = ref('');
 const password = ref('');
+
+const isSubmitDisabled = ref(true);
 
 const authStore = useAuthStore();
 const { user, loading, error } = storeToRefs(authStore);
@@ -45,6 +51,20 @@ const handleSubmit = async () => {
 
 	if (user.value) navigateTo('/home');
 };
+
+watch(
+	[name, username, email, password],
+	([newName, newUsername, newEmail, newPassword]) => {
+		isSubmitDisabled.value =
+			!newName || !newUsername || !newEmail || !newPassword;
+	}
+);
+
+watch(name, (newName, prevName) => {
+	if (username.value.replaceAll('_', ' ') === prevName) {
+		username.value = newName.toLowerCase().replaceAll(' ', '_');
+	}
+});
 
 definePageMeta({ layout: 'auth' });
 </script>
