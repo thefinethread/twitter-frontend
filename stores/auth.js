@@ -1,89 +1,99 @@
 import useAuth from '../services/useAuth';
 
-const useAuthStore = defineStore('auth', () => {
-	const user = ref(null);
-	const loading = ref(false);
-	const error = ref(null);
+const useAuthStore = defineStore(
+	'auth',
+	() => {
+		const user = ref(null);
+		const loading = ref(false);
+		const error = ref(null);
 
-	const { loginService, signUpService, getCurrentUserService, logoutService } =
-		useAuth();
+		console.log(user);
 
-	const setUser = (value) => (user.value = value);
-	const setLoading = (value) => (loading.value = value);
-	const setError = (value) => (error.value = value);
+		const {
+			loginService,
+			signUpService,
+			getCurrentUserService,
+			logoutService,
+		} = useAuth();
 
-	const login = async (userData) => {
-		initState();
-		try {
-			const data = await loginService(userData);
-			setUser(data);
-		} catch (err) {
-			setError(err?.data?.message);
-		} finally {
-			setLoading(false);
-		}
-	};
+		const setUser = (value) => (user.value = value);
+		const setLoading = (value) => (loading.value = value);
+		const setError = (value) => (error.value = value);
 
-	const signUp = async (userData) => {
-		initState();
+		const login = async (userData) => {
+			initState();
+			try {
+				const data = await loginService(userData);
+				setUser(data);
+			} catch (err) {
+				setError(err?.data?.message);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-		try {
-			const data = await signUpService(userData);
-			setUser(data);
-		} catch (err) {
-			setError(err.data.message);
-		} finally {
-			setLoading(false);
-		}
-	};
+		const signUp = async (userData) => {
+			initState();
 
-	const getCurrentUser = async () => {
-		initState();
+			try {
+				const data = await signUpService(userData);
+				setUser(data);
+			} catch (err) {
+				setError(err.data.message);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-		try {
-			const data = await getCurrentUserService();
-			setUser(data);
-			// navigateTo('/home');
-		} catch (err) {
-			setError(err.data.message);
-		} finally {
-			setLoading(false);
-		}
-	};
+		const getCurrentUser = async () => {
+			initState();
 
-	const logout = async () => {
-		initState();
+			try {
+				const data = await getCurrentUserService();
+				setUser(data);
+				// navigateTo('/home');
+			} catch (err) {
+				setError(err.data.message);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-		try {
-			await logoutService();
+		const logout = async () => {
+			initState();
 
-			setUser(null);
+			try {
+				await logoutService();
 
-			navigateTo('/');
-		} catch (err) {
-			setError(err?.data.message);
-		} finally {
-			setLoading(false);
-		}
-	};
+				setUser(null);
 
-	const initState = () => {
-		setLoading(true);
-		setError(null);
-	};
+				navigateTo('/');
+			} catch (err) {
+				setError(err?.data.message);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-	return {
-		user,
-		error,
-		loading,
-		login,
-		logout,
-		setUser,
-		setLoading,
-		setError,
-		signUp,
-		getCurrentUser,
-	};
-});
+		const initState = () => {
+			setLoading(true);
+			setError(null);
+		};
+
+		return {
+			user,
+			error,
+			loading,
+			login,
+			logout,
+			setUser,
+			setLoading,
+			setError,
+			signUp,
+			getCurrentUser,
+		};
+	},
+	{ persist: true }
+);
 
 export default useAuthStore;
