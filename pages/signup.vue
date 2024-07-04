@@ -4,15 +4,15 @@
 			<h2 class="text-4xl mb-10 text-left font-semibold leading-snug">
 				Create your account
 			</h2>
-			<form @submit.prevent="handleSubmit" class="sm:min-w-[28rem] w-80">
-				<InputText v-model="name" label="Name" />
-				<InputText v-model="username" label="Username" />
-				<InputText v-model="email" label="Email" />
-				<InputText v-model="password" label="Password" type="password" />
+			<form @submit.prevent="handleSignUp" class="sm:min-w-[28rem] w-80">
+				<InputText label="Name" name="name" />
+				<InputText label="Username" name="username" />
+				<InputText label="Email" name="email" />
+				<InputText label="Password" type="password" name="password" />
 
 				<MessageError :error="error" />
 				<ButtonPrimary
-					:disabled="isSubmitDisabled"
+					:disabled="!meta.valid"
 					width="w-full"
 					custom-class="py-3"
 				>
@@ -25,40 +25,37 @@
 </template>
 
 <script setup>
+import * as yup from 'yup';
 import useAuthStore from '../stores/auth';
-
-const name = ref('');
-const email = ref('');
-const username = ref('');
-const password = ref('');
-
-const isSubmitDisabled = ref(true);
 
 const authStore = useAuthStore();
 const { user, loading, error } = storeToRefs(authStore);
 
-const handleSubmit = async () => {
-	if (!name.value || !email.value || !username.value || !password.value) return;
+const schema = yup.object({
+	name: yup.string().min(3).required(),
+	username: yup.string().min(3).required(),
+	email: yup.string().email().required(),
+	password: yup.string().min(6).required(),
+});
 
-	const userData = {
-		name: name.value,
-		username: username.value,
-		email: email.value,
-		password: password.value,
-	};
+const { handleSubmit, meta } = useForm({
+	validationSchema: schema,
+	initialValues: {
+		name: '',
+		username: '',
+		email: '',
+		password: '',
+	},
+});
 
-	await authStore.signUp(userData);
+const handleSignUp = handleSubmit(async (values) => {
+	await authStore.signUp(values);
 
 	if (user.value) navigateTo('/home');
-};
+});
 
-watch(
-	[name, username, email, password],
-	([newName, newUsername, newEmail, newPassword]) => {
-		isSubmitDisabled.value =
-			!newName || !newUsername || !newEmail || !newPassword;
-	}
-);
+const { value: name } = useField('name');
+const { value: username } = useField('username');
 
 watch(name, (newName, prevName) => {
 	if (username.value.replaceAll('_', ' ') === prevName) {

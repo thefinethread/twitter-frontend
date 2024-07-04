@@ -7,8 +7,6 @@ const useAuthStore = defineStore(
 		const loading = ref(false);
 		const error = ref(null);
 
-		console.log(user);
-
 		const {
 			loginService,
 			signUpService,

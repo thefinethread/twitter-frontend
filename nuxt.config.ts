@@ -13,6 +13,12 @@ export default defineNuxtConfig({
 			},
 		],
 		'@pinia-plugin-persistedstate/nuxt',
+		[
+			'@vee-validate/nuxt',
+			{
+				autoImports: true,
+			},
+		],
 	],
 	alias: {
 		pinia: '/node_modules/@pinia/nuxt/node_modules/pinia/dist/pinia.mjs',

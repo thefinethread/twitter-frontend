@@ -4,13 +4,13 @@
 			<h2 class="text-4xl mb-10 text-left font-semibold leading-snug">
 				Sign in to X
 			</h2>
-			<form class="sm:min-w-[28rem] w-80" @submit.prevent="handleSubmit">
-				<InputText v-model="email" label="Email" />
-				<InputText v-model="password" label="Password" type="password" />
+			<form class="sm:min-w-[28rem] w-80" @submit.prevent="handleLogin">
+				<InputText label="Email" name="email" />
+				<InputText label="Password" type="password" name="password" />
 
 				<MessageError :error="error" />
 				<ButtonPrimary
-					:disabled="isSubmitDisabled"
+					:disabled="!meta.valid"
 					width="w-full"
 					custom-class="py-3"
 				>
@@ -24,33 +24,29 @@
 
 <script setup>
 import useAuthStore from '~/stores/auth';
-
-const email = ref('');
-const password = ref('');
-
-const isSubmitDisabled = ref(true);
+import * as yup from 'yup';
 
 const authStore = useAuthStore();
 const { setLoading, setError, login } = authStore;
 const { user, loading, error } = storeToRefs(authStore);
 
-const handleSubmit = async () => {
-	if (!email.value || !password.value) {
-		return;
-	}
+const schema = yup.object({
+	email: yup.string().email().required(),
+	password: yup.string().required(),
+});
 
-	const userData = {
-		email: email.value,
-		password: password.value,
-	};
+const { handleSubmit, meta } = useForm({
+	validationSchema: schema,
+	initialValues: {
+		email: '',
+		password: '',
+	},
+});
 
-	await login(userData);
+const handleLogin = handleSubmit(async (values) => {
+	await login(values);
 
 	if (user.value) navigateTo('/home');
-};
-
-watch([email, password], ([newEmail, newPassword]) => {
-	isSubmitDisabled.value = !newEmail || !newPassword;
 });
 
 onUnmounted(() => {
