@@ -24,7 +24,7 @@
 				<ButtonPrimary
 					width="w-full"
 					bg-color="bg-sky-500"
-					:handle-click="navigateToSignUpPage"
+					@click="navigateToSignUpPage"
 				>
 					Create account
 				</ButtonPrimary>

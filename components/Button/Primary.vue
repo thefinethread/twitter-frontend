@@ -8,7 +8,7 @@
 			textColor,
 			customClass,
 			disabledClasses,
-			'px-5 py-2 flex justify-center items-center rounded-full  hover:bg-opacity-90 transition-colors font-medium',
+			'px-5 flex cursor-pointer justify-center items-center rounded-full hover:bg-opacity-80 transition-colors font-medium',
 		]"
 		@click="handleClick"
 	>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-const { handleClick, disabled } = defineProps({
+const props = defineProps({
 	bgColor: {
 		default: 'bg-sky-500',
 	},
@@ -43,8 +43,8 @@ const { handleClick, disabled } = defineProps({
 });
 
 const disabledClasses = computed(() => {
-	return disabled
-		? 'disabled:cursor-not-allowed disabled:hover:bg-sky-700 disabled:bg-sky-700 '
+	return props.disabled
+		? 'disabled:cursor-not-allowed disabled:bg-zinc-400 '
 		: '';
 });
 </script>

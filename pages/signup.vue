@@ -11,9 +11,13 @@
 				<InputText label="Password" type="password" name="password" />
 
 				<MessageError :error="error" />
+
 				<ButtonPrimary
 					:disabled="!meta.valid"
 					width="w-full"
+					bg-color="bg-zinc-100"
+					text-color="text-zinc-900"
+					height="h-14"
 					custom-class="py-3"
 				>
 					<Loader v-if="loading" />

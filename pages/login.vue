@@ -12,10 +12,13 @@
 				<ButtonPrimary
 					:disabled="!meta.valid"
 					width="w-full"
+					bg-color="bg-zinc-100"
+					text-color="text-zinc-900"
+					height="h-14"
 					custom-class="py-3"
 				>
 					<Loader v-if="loading" />
-					<p v-else>Sign In</p>
+					<p v-else>Login</p>
 				</ButtonPrimary>
 			</form>
 		</div>
