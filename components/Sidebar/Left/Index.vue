@@ -31,12 +31,15 @@
 import { menu } from '~/constants/menu';
 import useAuthStore from '~/stores/auth';
 
+const loading = ref(false);
+
 const authStore = useAuthStore();
-const { loading } = storeToRefs(authStore);
 
 const goToComposePostPage = () => navigateTo('/compose/post');
 
 const logoutUser = () => {
+	loading.value = true;
 	authStore.logout();
+	loading.value = false;
 };
 </script>
