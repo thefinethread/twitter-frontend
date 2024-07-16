@@ -21,15 +21,10 @@ const useAuth = () => {
 		return res.data;
 	};
 
-	const getCurrentUserService = async () => {
-		const res = await $api(`${API_PREFIX}/get-me`);
-		return res.data;
-	};
-
 	const logoutService = async () => {
 		const res = await $api(`${API_PREFIX}/logout`, { method: 'POST' });
 	};
 
-	return { loginService, signUpService, getCurrentUserService, logoutService };
+	return { loginService, signUpService, logoutService };
 };
 export default useAuth;

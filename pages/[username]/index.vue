@@ -11,19 +11,29 @@
 </template>
 
 <script setup>
-import usePostStore from '~/stores/post';
+import usePost from '~/services/usePost';
+
+const posts = ref([]);
+const loading = ref(false);
 
 const { username } = useRoute().params;
 
-const postStore = usePostStore();
-const { getPostsByUsername, resetState } = postStore;
-const { posts, loading, error } = storeToRefs(postStore);
+const { getPostsByUsernameService } = usePost();
 
-onBeforeMount(() => {
-	if (username) getPostsByUsername(username);
-});
+const fetchPosts = async () => {
+	if (!username) return;
 
-onBeforeUnmount(() => {
-	resetState();
-});
+	loading.value = true;
+
+	try {
+		const data = await getPostsByUsernameService(username);
+		posts.value = data;
+	} catch (err) {
+		console.log(err);
+	} finally {
+		loading.value = false;
+	}
+};
+
+onBeforeMount(() => fetchPosts());
 </script>

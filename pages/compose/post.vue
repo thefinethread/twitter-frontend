@@ -10,6 +10,7 @@
 						contenteditable
 						class="text-zinc-200 text-lg placeholder outline-none translate-y-1"
 						:data-placeholder="'What is happening?!'"
+						@input="updateContent"
 					></div>
 
 					<div class="w-full my-7 relative" v-if="imageUpload">
@@ -45,7 +46,7 @@
 					</li>
 				</ul>
 
-				<ButtonPrimary height="h-9" width="w-20">
+				<ButtonPrimary :disabled="postBtnDisabled" height="h-9" width="w-20">
 					<Loader height="h-6" v-if="loading" />
 					<p v-else>Post</p>
 				</ButtonPrimary>
@@ -57,31 +58,42 @@
 <script setup>
 import { XMarkIcon, PhotoIcon } from '@heroicons/vue/24/outline';
 import GoogleLogo from '~/assets/images/Google.jpg';
-import usePostStore from '~/stores/post';
+import usePost from '~/services/usePost';
 
 const inputRef = ref(null);
+const text = ref('');
 const imageUpload = ref(null);
+const loading = ref(false);
 
-const postStore = usePostStore();
-const { loading, error } = storeToRefs(postStore);
+const { createPostService } = usePost();
 
 const { $toast } = useNuxtApp();
 
 const handleSubmit = async () => {
-	const content = inputRef.value.innerText;
+	if (!text.value) return;
 
-	if (!content) return;
+	loading.value = true;
+	try {
+		await createPostService({ content: text.value });
 
-	await postStore.createPost({ content });
-
-	if (!error.value) {
 		$toast.success('Post created successfully!');
 		resetInputs();
+	} catch (err) {
+		console.log(err);
+	} finally {
+		loading.value = false;
 	}
 };
 
 const resetInputs = () => {
 	inputRef.value.innerText = '';
+	text.value = '';
+};
+
+const updateContent = () => {
+	if (inputRef.value) {
+		text.value = inputRef.value.innerText;
+	}
 };
 
 const focusInput = () => {
@@ -89,6 +101,8 @@ const focusInput = () => {
 		inputRef.value.focus();
 	}
 };
+
+const postBtnDisabled = computed(() => !text.value);
 
 const handleFileChange = (event) => {
 	const file = event.target.files[0];

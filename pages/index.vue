@@ -17,8 +17,9 @@
 				<div class="w-full h-[1px] bg-zinc-400 my-7 relative bg-opacity-30">
 					<span
 						class="absolute left-1/2 top-0 -translate-y-1/2 opacity-80 -translate-x-1/2 px-2 bg-zinc-950"
-						>or</span
 					>
+						or
+					</span>
 				</div>
 
 				<ButtonPrimary

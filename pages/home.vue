@@ -20,17 +20,25 @@
 </template>
 
 <script setup>
-import usePostStore from '~/stores/post';
+import usePost from '~/services/usePost';
 
-const postStore = usePostStore();
-const { getPosts, resetState } = postStore;
-const { posts, loading, error } = storeToRefs(postStore);
+const posts = ref([]);
+const loading = ref(false);
 
-onBeforeMount(() => {
-	getPosts();
-});
+const { getPostsService } = usePost();
 
-onBeforeUnmount(() => {
-	resetState();
-});
+const fetchPosts = async () => {
+	loading.value = true;
+
+	try {
+		const data = await getPostsService();
+		posts.value = data;
+	} catch (err) {
+		console.log(err);
+	} finally {
+		loading.value = false;
+	}
+};
+
+onBeforeMount(() => fetchPosts());
 </script>
