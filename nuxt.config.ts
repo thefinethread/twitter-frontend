@@ -24,4 +24,8 @@ export default defineNuxtConfig({
 	build: {
 		transpile: ['pinia-plugin-persistedstate'],
 	},
+	routeRules: {
+		'/home': { ssr: true },
+		'/*': { ssr: false },
+	},
 });
