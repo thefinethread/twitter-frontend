@@ -40,5 +40,5 @@ const fetchPosts = async () => {
 	}
 };
 
-onBeforeMount(() => fetchPosts());
+onMounted(() => fetchPosts());
 </script>
