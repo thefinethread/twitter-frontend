@@ -21,15 +21,23 @@
 <script setup>
 import useUserStore from '~/stores/user';
 
+const loading = ref(false);
+
 const { username } = useRoute().params;
 
 const userStore = useUserStore();
 const { getFollowing, resetUserListState } = userStore;
-const { userList, loading, error } = storeToRefs(userStore);
+const { userList } = storeToRefs(userStore);
 
-onBeforeMount(() => {
-	if (username) getFollowing(username);
-});
+const fetchFollowing = async () => {
+	if (username) {
+		loading.value = true;
+		await getFollowing(username);
+		loading.value = false;
+	}
+};
+
+onBeforeMount(() => fetchFollowing());
 
 onBeforeUnmount(() => {
 	resetUserListState();

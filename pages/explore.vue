@@ -36,14 +36,17 @@ import { MagnifyingGlassIcon } from '@heroicons/vue/24/outline';
 import useUserStore from '~/stores/user';
 
 const searchTerm = ref('');
+const loading = ref(false);
 
 const userStore = useUserStore();
-const { userList, loading, error } = storeToRefs(userStore);
+const { userList } = storeToRefs(userStore);
 
 const handleSubmit = async () => {
 	if (!searchTerm.value.length) return;
 
+	loading.value = true;
 	await userStore.searchUser(searchTerm.value);
+	loading.value = false;
 };
 
 onBeforeUnmount(() => {

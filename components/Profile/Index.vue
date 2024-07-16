@@ -13,14 +13,22 @@
 <script setup>
 import useUserStore from '~/stores/user';
 
+const loading = ref(false);
+
 const userStore = useUserStore();
-const { loading, user, error } = storeToRefs(userStore);
+const { user } = storeToRefs(userStore);
 
 const { username } = useRoute().params;
 
-onBeforeMount(() => {
-	if (username) userStore.getProfile(username);
-});
+const fetchUserProfile = async () => {
+	if (username) {
+		loading.value = true;
+		await userStore.getProfile(username);
+		loading.value = false;
+	}
+};
+
+onBeforeMount(() => fetchUserProfile());
 
 onBeforeUnmount(() => {
 	userStore.resetUserState();

@@ -5,7 +5,6 @@ const useUserStore = defineStore('user', () => {
 	const user = ref(null);
 	const userList = ref([]);
 	const error = ref(null);
-	const loading = ref(false);
 
 	const {
 		searchUserService,
@@ -22,57 +21,48 @@ const useUserStore = defineStore('user', () => {
 	const setUser = (value) => (user.value = value);
 	const setUserList = (value) => (userList.value = value);
 	const setError = (value) => (error.value = value);
-	const setLoading = (value) => (loading.value = value);
 
 	const searchUser = async (searchTerm) => {
-		initState();
+		setError(null);
 
 		try {
 			const data = await searchUserService(searchTerm);
 			setUserList(data);
 		} catch (err) {
 			setError(err.data.message);
-		} finally {
-			setLoading(false);
 		}
 	};
 
 	const getProfile = async (userId) => {
-		initState();
+		setError(null);
 
 		try {
 			const data = await getProfileService(userId);
 			setUser(data);
 		} catch (err) {
 			setError(err?.data?.message);
-		} finally {
-			setLoading(false);
 		}
 	};
 
 	const getFollowers = async (username) => {
-		initState();
+		setError(null);
 
 		try {
 			const data = await getFollowersService(username);
 			setUserList(data);
 		} catch (err) {
 			setError(err?.data?.message);
-		} finally {
-			setLoading(false);
 		}
 	};
 
 	const getFollowing = async (username) => {
-		initState();
+		setError(null);
 
 		try {
 			const data = await getFollowingService(username);
 			setUserList(data);
 		} catch (err) {
 			setError(err?.data?.message);
-		} finally {
-			setLoading(false);
 		}
 	};
 
@@ -113,26 +103,18 @@ const useUserStore = defineStore('user', () => {
 		}
 	};
 
-	const initState = () => {
-		setError(null);
-		setLoading(true);
-	};
-
 	const resetUserListState = () => {
 		setUserList([]);
 		setError(null);
-		setLoading(false);
 	};
 
 	const resetUserState = () => {
 		setUser(null);
 		setError(null);
-		setLoading(false);
 	};
 
 	return {
 		userList,
-		loading,
 		error,
 		user,
 		searchUser,
