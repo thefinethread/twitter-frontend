@@ -29,9 +29,11 @@
 import useAuthStore from '~/stores/auth';
 import * as yup from 'yup';
 
+const loading = ref(false);
+
 const authStore = useAuthStore();
-const { setLoading, setError, login } = authStore;
-const { user, loading, error } = storeToRefs(authStore);
+const { setError, login } = authStore;
+const { user, error } = storeToRefs(authStore);
 
 const schema = yup.object({
 	email: yup.string().email().required(),
@@ -47,14 +49,15 @@ const { handleSubmit, meta } = useForm({
 });
 
 const handleLogin = handleSubmit(async (values) => {
+	loading.value = true;
 	await login(values);
+	loading.value = false;
 
 	if (user.value) navigateTo('/home');
 });
 
 onUnmounted(() => {
 	setError(null);
-	setLoading(false);
 });
 
 definePageMeta({ layout: 'auth' });

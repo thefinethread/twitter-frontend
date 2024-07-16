@@ -4,42 +4,36 @@ const useAuthStore = defineStore(
 	'auth',
 	() => {
 		const user = ref(null);
-		const loading = ref(false);
 		const error = ref(null);
 
 		const { loginService, signUpService, logoutService } = useAuth();
 
 		const setUser = (value) => (user.value = value);
-		const setLoading = (value) => (loading.value = value);
 		const setError = (value) => (error.value = value);
 
 		const login = async (userData) => {
-			initState();
+			setError(null);
 			try {
 				const data = await loginService(userData);
 				setUser(data);
 			} catch (err) {
 				setError(err?.data?.message);
-			} finally {
-				setLoading(false);
 			}
 		};
 
 		const signUp = async (userData) => {
-			initState();
+			setError(null);
 
 			try {
 				const data = await signUpService(userData);
 				setUser(data);
 			} catch (err) {
 				setError(err.data.message);
-			} finally {
-				setLoading(false);
 			}
 		};
 
 		const logout = async () => {
-			initState();
+			setError(null);
 
 			try {
 				await logoutService();
@@ -49,24 +43,15 @@ const useAuthStore = defineStore(
 				navigateTo('/');
 			} catch (err) {
 				setError(err?.data.message);
-			} finally {
-				setLoading(false);
 			}
-		};
-
-		const initState = () => {
-			setLoading(true);
-			setError(null);
 		};
 
 		return {
 			user,
 			error,
-			loading,
 			login,
 			logout,
 			setUser,
-			setLoading,
 			setError,
 			signUp,
 		};

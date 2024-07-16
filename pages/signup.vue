@@ -32,8 +32,10 @@
 import * as yup from 'yup';
 import useAuthStore from '../stores/auth';
 
+const loading = ref(false);
+
 const authStore = useAuthStore();
-const { user, loading, error } = storeToRefs(authStore);
+const { user, error } = storeToRefs(authStore);
 
 const schema = yup.object({
 	name: yup.string().min(3).required(),
@@ -53,7 +55,9 @@ const { handleSubmit, meta } = useForm({
 });
 
 const handleSignUp = handleSubmit(async (values) => {
+	loading.value = true;
 	await authStore.signUp(values);
+	loading.value = false;
 
 	if (user.value) navigateTo('/home');
 });
