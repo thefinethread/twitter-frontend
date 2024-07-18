@@ -12,7 +12,7 @@
 					</li>
 				</ul>
 
-				<SidebarLeftPostBtn :click-handler="goToComposePostPage" />
+				<SidebarLeftPostBtn @click="openModal" />
 			</div>
 
 			<SidebarLeftLogout @click="logoutUser" />
@@ -25,6 +25,8 @@
 	>
 		<Loader />
 	</div>
+
+	<Modal v-if="isModalOpen" :close-modal="closeModal" />
 </template>
 
 <script setup>
@@ -35,7 +37,7 @@ const loading = ref(false);
 
 const authStore = useAuthStore();
 
-const goToComposePostPage = () => navigateTo('/compose/post');
+const { isModalOpen, openModal, closeModal } = useModal();
 
 const logoutUser = () => {
 	loading.value = true;
