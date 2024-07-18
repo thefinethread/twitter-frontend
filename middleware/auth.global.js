@@ -1,6 +1,6 @@
 import useAuthStore from '~/stores/auth';
 
-const publicRoutes = ['/login', '/signup', '/', '/login-error'];
+const publicRoutes = ['/login', '/signup', '/'];
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
 	const authStore = useAuthStore();
