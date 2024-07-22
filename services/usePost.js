@@ -4,8 +4,15 @@ const usePost = () => {
 	const { $api } = useNuxtApp();
 
 	const getPostsService = async () => {
-		const res = await $api(`${API_PREFIX}`);
-		return res.data;
+		const res = await useAsyncData('posts', () =>
+			$fetch('http://localhost:5000/api/post', {
+				credentials: 'include',
+				headers: {
+					cookie: useRequestHeaders(['cookie']).cookie,
+				},
+			})
+		);
+		return res;
 	};
 
 	const getPostsByUsernameService = async (username) => {

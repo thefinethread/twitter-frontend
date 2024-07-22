@@ -3,7 +3,9 @@
 		<Loader v-if="loading" />
 
 		<!-- <div v-else-if="error" class="text-center">
-			<Message :message="error" />
+			<Message size="text-2xl" custom-class="opacity-40 mt-10">
+				{{ error.data?.message }}
+			</Message>
 		</div> -->
 
 		<Message
@@ -21,24 +23,25 @@
 
 <script setup>
 import usePost from '~/services/usePost';
+import useAuthStore from '~/stores/auth';
 
 const posts = ref([]);
-const loading = ref(false);
+const loading = ref(true);
 
 const { getPostsService } = usePost();
 
 const fetchPosts = async () => {
-	loading.value = true;
+	const { data, error } = await getPostsService();
 
-	try {
-		const data = await getPostsService();
-		posts.value = data;
-	} catch (err) {
-		console.log(err);
-	} finally {
-		loading.value = false;
+	if (data.value) {
+		posts.value = data.value?.data;
 	}
+	if (error?.value?.statusCode == 401) {
+		useAuthStore().logout();
+	}
+
+	loading.value = false;
 };
 
-onMounted(() => fetchPosts());
+await fetchPosts();
 </script>
